@@ -40,8 +40,8 @@ class Login extends Component {
               const username = this.usernameRef.current.value;
 
               event.preventDefault();
-              this.props.dispatch(signIn(username));
-              history.push({ pathname: "/app" });
+              this.props.dispatch(signIn(this.props.users[username]));
+              history.push({ pathname: "/" });
             }}
           >
             Sign in

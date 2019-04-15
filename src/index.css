@@ -19,3 +19,13 @@ code {
   padding: 15px;
   margin: auto;
 }
+
+.author-avatar {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.card-body__author {
+  margin-bottom: 15px;
+}

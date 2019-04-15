@@ -6,16 +6,16 @@ import { withRouter } from "react-router-dom";
 class Header extends Component {
   render() {
     return (
-      <header className="container">
+      <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link className="navbar-brand" to="/app">
+          <Link className="navbar-brand" to="/">
             Would You Rather?
           </Link>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
-                <Link className="nav-link" to="/app">
+                <Link className="nav-link" to="/">
                   Home <span className="sr-only">(current)</span>
                 </Link>
               </li>
@@ -24,7 +24,7 @@ class Header extends Component {
               className="navbar-text"
               style={{ marginRight: 5, color: "black" }}
             >
-              {this.props.loggedUserUsername} |
+              {this.props.authedUser.name} |
             </span>
             <Link className="navbar-text" to="/signout">
               Sign out
@@ -37,7 +37,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = ({ signin }) => ({
-  loggedUserUsername: signin.username
+  authedUser: signin.user
 });
 
 export default withRouter(connect(mapStateToProps)(Header));
