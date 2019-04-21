@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { chooseOption } from "../reducers/questions";
-import { isEmpty } from "../utils";
+import { isEmpty, percentage } from "../utils";
 
 class Question extends Component {
   handleOption(e, questionId, option) {
@@ -34,6 +34,9 @@ class Question extends Component {
       );
     }
 
+    const { optionOne, optionTwo } = question;
+    const totalVotes = optionOne.votes.length + optionTwo.votes.length;
+
     return (
       <div>
         <div className="card text-center">
@@ -56,7 +59,8 @@ class Question extends Component {
                   >
                     {question.optionOne.text}{" "}
                     <span className="badge badge-pill badge-dark">
-                      {this.props.optionOneCount}
+                      {this.props.optionOneCount} votes (
+                      {percentage(totalVotes, optionOne.votes.length)})
                     </span>
                   </span>
                   <span
@@ -64,9 +68,10 @@ class Question extends Component {
                       "optionTwo"
                     )}`}
                   >
-                    {question.optionTwo.text}{" "}
+                    {optionTwo.text}{" "}
                     <span className="badge badge-pill badge-dark">
-                      {this.props.optionTwoCount}
+                      {this.props.optionTwoCount} votes (
+                      {percentage(totalVotes, optionTwo.votes.length)})
                     </span>
                   </span>
                 </div>
@@ -77,14 +82,14 @@ class Question extends Component {
                       this.handleOption(e, question.id, "optionOne")
                     }
                   >
-                    {question.optionOne && question.optionOne.text}
+                    {optionOne.text}
                   </button>
                   <button
                     onClick={e =>
                       this.handleOption(e, question.id, "optionTwo")
                     }
                   >
-                    {question.optionTwo && question.optionTwo.text}
+                    {optionTwo.text}
                   </button>
                 </div>
               )}

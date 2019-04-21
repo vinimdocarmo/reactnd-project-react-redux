@@ -44,3 +44,7 @@ export const isEmpty = obj => {
   }
   return true;
 };
+
+export const percentage = (total, partial) => {
+  return `${(partial * 100) / total}%`;
+};
