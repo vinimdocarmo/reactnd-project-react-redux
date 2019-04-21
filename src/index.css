@@ -33,3 +33,7 @@ code {
 .option-badge {
   font-size: 16px;
 }
+
+.btn-link.active {
+  text-decoration: underline;
+}

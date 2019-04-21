@@ -9,13 +9,18 @@ class Home extends Component {
     super(props);
     this.state = { choosenPoll: "unanswered" };
   }
+
+  classFor(poll) {
+    return this.state.choosenPoll === poll ? "active" : "";
+  }
+
   render() {
     return (
       <div className="container">
         <div>
           <span>
             <button
-              className="btn btn-link"
+              className={`btn btn-link ${this.classFor("unanswered")}`}
               onClick={() => this.setState({ choosenPoll: "unanswered" })}
             >
               Unanswered
@@ -23,7 +28,7 @@ class Home extends Component {
           </span>
           <span>
             <button
-              className="btn btn-link"
+              className={`btn btn-link ${this.classFor("answered")}`}
               onClick={() => this.setState({ choosenPoll: "answered" })}
             >
               Answered
