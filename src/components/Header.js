@@ -25,7 +25,7 @@ class Header extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/new-poll">
+                <Link className="nav-link" to="/add">
                   Create new poll
                 </Link>
               </li>

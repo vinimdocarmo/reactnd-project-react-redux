@@ -15,6 +15,10 @@ class LoggedArea extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
+    if (!this.props.isLoggedIn) {
+      return;
+    }
+
     dispatch(fetchAllUsers());
     dispatch(fetchAllQuestions());
   }
@@ -25,7 +29,7 @@ class LoggedArea extends Component {
         <Header />
         <Route path="/" exact component={Home} />
         <Route path="/leaderboard" component={Leaderboard} />
-        <Route path="/new-poll" component={NewPoll} />
+        <Route path="/add" component={NewPoll} />
         <Route path={`/questions/:questionId`} component={Question} />
       </div>
     ) : (

@@ -1,7 +1,8 @@
-import { _getQuestions } from "../_DATA";
+import { _getQuestions, _saveQuestion } from "../_DATA";
 
 export const FETCH_ALL_QUESTIONS = "FETCH_ALL_QUESTIONS";
 export const CHOOSE_OPTION = "CHOOSE_OPTION";
+export const CREATE_QUESTION = "CREATE_QUESTION";
 
 export const fetchAllQuestions = () => dispatch =>
   _getQuestions().then(questions =>
@@ -15,6 +16,16 @@ export const chooseOption = (questionId, option, user) => {
     option,
     user
   };
+};
+
+export const createQuestion = (
+  optionOneText,
+  optionTwoText,
+  author
+) => dispatch => {
+  return _saveQuestion({ optionOneText, optionTwoText, author }).then(
+    question => dispatch({ type: CREATE_QUESTION, question })
+  );
 };
 
 export default function handleQuestions(state = {}, action) {
@@ -32,6 +43,10 @@ export default function handleQuestions(state = {}, action) {
             votes: [action.user.id, ...currentChoosenOption.votes]
           })
         })
+      });
+    case CREATE_QUESTION:
+      return Object.assign({}, state, {
+        [action.question.id]: action.question
       });
     default:
       return state;
