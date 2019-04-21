@@ -24,6 +24,11 @@ class Header extends Component {
                   Leaderboard
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/new-poll">
+                  Create new poll
+                </Link>
+              </li>
             </ul>
             <span
               className="navbar-text"

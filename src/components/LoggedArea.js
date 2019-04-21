@@ -7,6 +7,7 @@ import Header from "./Header";
 import Home from "./Home";
 import Question from "./Question";
 import Leaderboard from "./Leaderboard";
+import NewPoll from "./NewPoll";
 import { fetchAllUsers } from "../reducers/users";
 import { fetchAllQuestions } from "../reducers/questions";
 
@@ -24,6 +25,7 @@ class LoggedArea extends Component {
         <Header />
         <Route path="/" exact component={Home} />
         <Route path="/leaderboard" component={Leaderboard} />
+        <Route path="/new-poll" component={NewPoll} />
         <Route path={`/questions/:questionId`} component={Question} />
       </div>
     );
