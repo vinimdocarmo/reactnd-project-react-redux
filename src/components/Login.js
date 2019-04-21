@@ -15,7 +15,8 @@ class Login extends Component {
   }
 
   render() {
-    const { history, users } = this.props;
+    const { history, users, location } = this.props;
+    let { from } = location.state || { from: { pathname: "/" } };
 
     return (
       <div>
@@ -41,7 +42,7 @@ class Login extends Component {
 
               event.preventDefault();
               this.props.dispatch(signIn(this.props.users[username]));
-              history.push({ pathname: "/" });
+              history.push(from);
             }}
           >
             Sign in

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import Header from "./Header";
 import Home from "./Home";
@@ -20,7 +20,7 @@ class LoggedArea extends Component {
   }
 
   render() {
-    return (
+    return this.props.isLoggedIn ? (
       <div className="container">
         <Header />
         <Route path="/" exact component={Home} />
@@ -28,8 +28,17 @@ class LoggedArea extends Component {
         <Route path="/new-poll" component={NewPoll} />
         <Route path={`/questions/:questionId`} component={Question} />
       </div>
+    ) : (
+      <Redirect
+        to={{
+          pathname: "/signin",
+          state: { from: this.props.location }
+        }}
+      />
     );
   }
 }
 
-export default withRouter(connect()(LoggedArea));
+const mapStateToProps = ({ signin }) => ({ isLoggedIn: signin.isLoggedIn });
+
+export default withRouter(connect(mapStateToProps)(LoggedArea));

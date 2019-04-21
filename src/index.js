@@ -11,6 +11,7 @@ import middleware from "./middleware";
 import reducers from "./reducers";
 import Logout from "./components/Logout";
 import LoggedArea from "./components/LoggedArea";
+import NoMatch from "./components/NoMatch";
 
 const store = createStore(reducers, middleware);
 
@@ -20,6 +21,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/signin" component={Login} />
         <Route path="/signout" component={Logout} />
+        <Route path="/404" component={NoMatch} />
         <Route path="/" component={LoggedArea} />
       </Switch>
     </Router>
