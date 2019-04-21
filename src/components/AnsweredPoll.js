@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { orderBy } from "../utils";
+import { orderBy, selectAnsweredPoll } from "../utils";
 import PollList from "./PollList";
 
 class AnsweredPoll extends Component {
@@ -14,8 +14,15 @@ class AnsweredPoll extends Component {
   }
 }
 
-const mapStateToProps = ({ questions }) => ({
-  questions: orderBy(Object.values(questions), "timestamp DESC")
-});
+const mapStateToProps = ({ questions, signin }) => {
+  const answeredPoll = selectAnsweredPoll(
+    Object.values(questions),
+    signin.user
+  );
+
+  return {
+    questions: orderBy(answeredPoll, "timestamp DESC")
+  };
+};
 
 export default withRouter(connect(mapStateToProps)(AnsweredPoll));
