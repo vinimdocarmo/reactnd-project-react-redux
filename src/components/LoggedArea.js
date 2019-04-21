@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
 import Question from "./Question";
+import Leaderboard from "./Leaderboard";
 import { fetchAllUsers } from "../reducers/users";
 import { fetchAllQuestions } from "../reducers/questions";
 
@@ -22,6 +23,7 @@ class LoggedArea extends Component {
       <div className="container">
         <Header />
         <Route path="/" exact component={Home} />
+        <Route path="/leaderboard" component={Leaderboard} />
         <Route path={`/questions/:questionId`} component={Question} />
       </div>
     );
