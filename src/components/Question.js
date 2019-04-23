@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { chooseOption } from "../reducers/questions";
-import { isEmpty, percentage } from "../utils";
+import { percentage } from "../utils";
 
 class Question extends Component {
   handleOption(e, questionId, option) {
@@ -22,17 +22,6 @@ class Question extends Component {
 
   render() {
     const { question, author } = this.props;
-
-    if (!this.props.questionExists) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/404",
-            state: { from: this.props.location }
-          }}
-        />
-      );
-    }
 
     const { optionOne, optionTwo } = question;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length;
@@ -123,8 +112,7 @@ const mapStateToProps = ({ users, questions, signin }, { match }) => {
     optionOneCount: optionOne.votes.length,
     optionTwoCount: optionTwo.votes.length,
     answeredOption,
-    authedUser: signin.user,
-    questionExists: !isEmpty(questions) && questions[questionId]
+    authedUser: signin.user
   };
 };
 

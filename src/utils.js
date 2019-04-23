@@ -38,13 +38,6 @@ export const selectUnansweredPoll = (poll, authedUser) => {
   return unansweredPoll;
 };
 
-export const isEmpty = obj => {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
-};
-
 export const percentage = (total, partial) => {
   return `${((partial * 100) / total).toPrecision(3)}%`;
 };

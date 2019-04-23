@@ -26,8 +26,10 @@ class Login extends Component {
             <label htmlFor="users">Select an existing user</label>
             <select className="form-control" id="users" ref={this.usernameRef}>
               {users ? (
-                Object.keys(users).map(username => (
-                  <option key={username}>{username}</option>
+                Object.values(users).map(user => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
                 ))
               ) : (
                 <option>Loading...</option>

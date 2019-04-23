@@ -26,6 +26,10 @@ code {
   margin-right: 10px;
 }
 
+.author-avatar--sm {
+  width: 20px;
+}
+
 .card-body__author {
   margin-bottom: 15px;
 }
