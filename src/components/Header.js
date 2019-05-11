@@ -30,10 +30,7 @@ class Header extends Component {
                 </Link>
               </li>
             </ul>
-            <span
-              className="navbar-text"
-              style={{ marginRight: 5, color: "black" }}
-            >
+            <span className="navbar-text user-name">
               {this.props.authedUser.name} |
             </span>
             <Link className="navbar-text" to="/signout">

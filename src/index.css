@@ -41,3 +41,8 @@ code {
 .btn-link.active {
   text-decoration: underline;
 }
+
+.navbar-text.user-name {
+  color: black;
+  margin-right: 5px;
+}
