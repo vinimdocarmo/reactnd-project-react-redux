@@ -14,6 +14,18 @@ class Login extends Component {
     this.props.dispatch(fetchAllUsers());
   }
 
+  renderUserOptions() {
+    const { users } = this.props;
+
+    const options = () => Object.values(users).map(user => (
+      <option key={user.id} value={user.id}>
+        {user.name}
+      </option>
+    ));
+
+    return users ? options() : (<option>Loading...</option>);
+  }
+
   render() {
     const { history, users, location } = this.props;
     let { from } = location.state || { from: { pathname: "/" } };
@@ -25,15 +37,7 @@ class Login extends Component {
           <div className="form-group">
             <label htmlFor="users">Select an existing user</label>
             <select className="form-control" id="users" ref={this.usernameRef}>
-              {users ? (
-                Object.values(users).map(user => (
-                  <option key={user.id} value={user.id}>
-                    {user.name}
-                  </option>
-                ))
-              ) : (
-                <option>Loading...</option>
-              )}
+              {this.renderUserOptions()}
             </select>
           </div>
           <button
