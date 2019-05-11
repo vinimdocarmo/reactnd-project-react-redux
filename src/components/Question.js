@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { chooseOption } from "../reducers/questions";
 import { percentage } from "../utils";
 
@@ -21,7 +21,15 @@ class Question extends Component {
   }
 
   render() {
-    const { question, author } = this.props;
+    const { question, author, loading, location } = this.props;
+
+    if (loading) {
+      return <p>Loading...</p>;
+    }
+
+    if (question.id === null) {
+      return <Redirect to={{ pathname: "/404", state: { from: location } }} />;
+    }
 
     const { optionOne, optionTwo } = question;
     const totalVotes = optionOne.votes.length + optionTwo.votes.length;
@@ -65,23 +73,23 @@ class Question extends Component {
                   </span>
                 </div>
               ) : (
-                <div>
-                  <button
-                    onClick={e =>
-                      this.handleOption(e, question.id, "optionOne")
-                    }
-                  >
-                    {optionOne.text}
-                  </button>
-                  <button
-                    onClick={e =>
-                      this.handleOption(e, question.id, "optionTwo")
-                    }
-                  >
-                    {optionTwo.text}
-                  </button>
-                </div>
-              )}
+                  <div>
+                    <button
+                      onClick={e =>
+                        this.handleOption(e, question.id, "optionOne")
+                      }
+                    >
+                      {optionOne.text}
+                    </button>
+                    <button
+                      onClick={e =>
+                        this.handleOption(e, question.id, "optionTwo")
+                      }
+                    >
+                      {optionTwo.text}
+                    </button>
+                  </div>
+                )}
             </div>
           </div>
         </div>
@@ -90,9 +98,9 @@ class Question extends Component {
   }
 }
 
-const mapStateToProps = ({ users, questions, signin }, { match }) => {
+const mapStateToProps = ({ users, questions, signin, loading }, { match }) => {
   const questionId = match.params.questionId;
-  const question = questions[questionId] || {};
+  const question = questions[questionId] || { id: null };
   const author = question.author ? users[question.author] : {};
 
   const optionOne = question.optionOne || { votes: [] };
@@ -107,6 +115,7 @@ const mapStateToProps = ({ users, questions, signin }, { match }) => {
   }
 
   return {
+    loading,
     author,
     question,
     optionOneCount: optionOne.votes.length,
